@@ -1,35 +1,49 @@
-class Student{
+class Student extends Person{
 
     constructor(name, surname, age, gender){
-        this.name = name;
-        this.surname = surname;
-        this.age = age;
-        this.gender = gender;
-        this.grades = [];
+        super(name, surname, age, gender)
+        this._grades = [];
     }
 
-    addGrade(grade){
-        if (grade >= 0 && grade <= 10) {
-            this.grades.push(grade);
+    set grade(value){
+        if (value >= 0 && value <=10) {
+            this._grades.push(value);
         }
     }
+
+    get grade(){
+        return this.calculateMean();
+    }
+
+    // get gender(){
+    //     return this._gender;
+    // }
+
+
+    // get age(){
+    //     let now = new Date();
+    //     let age = now.getFullYear() - this.yob;
+    //     return age
+    // }
+
+    // set age(value){
+    //     let now = new Date();
+    //     this.yob = now.getFullYear() - value;
+    // }
+
+
+
 
     calculateMean(){
-        if (this.grades.length === 0) {
+        if (this._grades.length === 0) {
             return -1;
         }
-        const sum = this.grades.reduce((p, c) => p + c);
-        const mean = sum / this.grades.length;
+        const sum = this._grades.reduce((p, c) => p + c);
+        const mean = sum / this._grades.length;
         return mean;
     }
 
-    generateCode(){
-        const now = new Date();
-        const actualYear = now.getFullYear();
-        const birthYear = actualYear - this.age;
-        const code = this.name[0] + this.name[1] + this.surname[0] + this.surname[1] + birthYear;
-        return code;
-    }
+
 
     toString(){
 

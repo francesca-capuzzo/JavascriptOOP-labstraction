@@ -1,11 +1,22 @@
-class Teacher {
+class Teacher extends Person{
     constructor(name, surname, age, gender, degree) {
-
+        super(name, surname, age, gender);
+        this.degree = degree;
         this.students = [];
     }
 
     toString() {
+        let teacherDescription = "Nome: " + this.name + "\n" 
+                                 + "Cognome: " + this.surname + "\n"
+                                 + "Età: " + this.age + "\n"
+                                 + "Classe: " + this.degree + "\n\n"
+                                 + "Alunni:\n\n";
 
+        for (const stud of this.students) {
+            teacherDescription += stud.toString() + "\n\n";
+        }
+
+        return teacherDescription;
     }
 
     addStudent(student) {
@@ -52,7 +63,7 @@ class Teacher {
 
         this.students.forEach(stud => {
             if (stud.generateCode() === studentCode) {
-                stud.addGrade(grade);
+                stud.grade = grade;
             }
         });
 
@@ -61,7 +72,7 @@ class Teacher {
     bestStudent() {
 
         if (this.students.length === 0) {
-            return "nessun miglior studente"
+            return null;
         }
 
         // let bestStudent = this.students[0];
@@ -73,9 +84,14 @@ class Teacher {
         //     }
         // }
         
-        // return bestStudent.toString();
+        // return bestStudent;
 
-        return this.students.reduce((p, c) => p.calculateMean() > c.calculateMean() ? p : c).toString()
+        return this.students.reduce((p, c) => p.calculateMean() > c.calculateMean() ? p : c)
 
+    }
+
+
+    bestStudentToString(){
+        return this.bestStudent.toString()
     }
 }
