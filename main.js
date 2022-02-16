@@ -60,3 +60,5 @@ principal.addStudentToTeacher("paperis", student4);
 
 
 console.log(principal.bestTeacherToString())
+
+
